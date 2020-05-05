@@ -3,13 +3,14 @@ public class TestDistributedLock {
     
     public static void main(String[] args) {
 
+        final int connectionTimeout=60*1000;
 
-        final ZkClientExt zkClientExt1 = new ZkClientExt("192.168.3.157:2181", 5000,
+        final ZkClientExt zkClientExt1 = new ZkClientExt("192.168.3.157:2181", connectionTimeout,
                 5000, new BytesPushThroughSerializer());
 
         final SimpleDistributedLockMutex mutex1 = new SimpleDistributedLockMutex(zkClientExt1, "/Mutex");
         
-        final ZkClientExt zkClientExt2 = new ZkClientExt("192.168.3.157:2181", 5000,
+        final ZkClientExt zkClientExt2 = new ZkClientExt("192.168.3.157:2181", connectionTimeout,
                 5000, new BytesPushThroughSerializer());
         final SimpleDistributedLockMutex mutex2 = new SimpleDistributedLockMutex(zkClientExt2, "/Mutex");
         
